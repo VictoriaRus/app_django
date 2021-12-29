@@ -1,0 +1,41 @@
+{% extends 'firstapp/base.html' %}
+
+{% block title %}Оставить отзыв{% endblock %}
+
+{% block content %}
+ {% if  user.is_authenticated%}
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Создать отзыв</h1>
+        <br>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.title }}
+            <br>
+            {{ form.content }}
+            <br>
+            <!--<input type="text" placeholder="Введите тему" class="form-control">
+            <textarea placeholder="Введите ваш коментарий" class="form-control" cols="30" rows="10"></textarea>-->
+            <button type="submit" class="btn btn-success">Добавить</button>
+            <span>{{error}}</span>
+        </form>
+    </div>
+</div>
+
+{% for coment in coments %}
+<div class="alert alert-warning mt-2">
+    <h3>{{ coment.title }}</h3>
+    <p>{{ coment.content|safe }}</p>
+    <p>{{ coment.created_at|date:"Y-m-d"}}</p>
+</div>
+{% endfor %}
+
+
+
+{% else %}
+<h1>Вы не вошли в аккаунт (или его у вас нет)</h1>
+{% endif %}
+
+{% endblock %}
+
+

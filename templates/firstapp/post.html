@@ -1,0 +1,29 @@
+{% extends 'firstapp/base.html' %}
+{% block title %}Post{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Post</h1>
+        {% for post in object_list %}
+        <div class="alert alert-info mt-2">
+            <a href="{% url 'post-detail' post.pk %}"><h3>{{ post.title }}</h3></a>
+            <p>Автор: {{ post.author }} {{ post.author.first_name }} {{ post.author.last_name }} 
+                {% if user.is_authenticated%}
+                    {% if user.id == post.author.id%}
+                    - <a href = "{% url 'update_post' post.pk %}">Редоктировать</a>
+                    - <a href = "{% url 'delete_post' post.pk %}">Удалить</a></p>
+                    {% endif %}
+                {% endif %}
+            <p>{{ post.author.email}}</p>
+            <p>{{ post.title_tag}}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+{% endblock %}

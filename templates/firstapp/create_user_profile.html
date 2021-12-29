@@ -1,0 +1,23 @@
+{% extends 'firstapp/base.html' %}
+{% block title %}Создать личную страницу{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated%}
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Создать личную страницу...</h1>
+        <br>
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p}}
+                <button class="btn btn-secondary">Создать</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% else %}
+<h1>Вы не вошли в аккаунт (или его у вас нет)</h1>
+{% endif %}
+
+{% endblock %}

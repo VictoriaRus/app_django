@@ -1,0 +1,29 @@
+{% extends 'firstapp/base.html' %}
+{% block title %}Add Post{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated%}
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Add Post...</h1>
+        <br>
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.media}}
+                {{ form.as_p}}
+                <button class="btn btn-secondary">Добавить</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    var name = "{{user.id}}";
+    document.getElementById("elder").value = name;
+</script>
+
+{% else %}
+<h1>Вы не вошли в аккаунт (или его у вас нет)</h1>
+{% endif %}
+
+{% endblock %}

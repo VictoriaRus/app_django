@@ -1,0 +1,17 @@
+{% extends 'firstapp/base.html' %}
+
+{% block title %}Комментарии{% endblock %}
+
+{% block content %}
+
+
+{% for coment in coments %}
+<div class="alert alert-warning mt-2">
+    <h3>{{ coment.title }}</h3>
+    <p>{{ coment.content|safe }}</p>
+    <p>{{ coment.created_at|date:"Y-m-d"}}</p>
+</div>
+{% endfor %}
+
+
+{% endblock %}
